@@ -1,45 +1,76 @@
-import tkinter as tk
-from tkinter import messagebox
+from tkinter import *
 
-class App:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Interactive Application")
-        self.root.geometry('400x300')
+# Create the main window
+root = Tk()
+root.title('Sign In')
+root.geometry('500x400')
 
-        self.create_widgets()
+# Define StringVar variables to hold the input data
+name = StringVar()
+email = StringVar()
+phno = StringVar()
 
-    def create_widgets(self):
-        # Textbox for input
-        self.input_frame = tk.Frame(self.root)
-        self.input_frame.pack(pady=10)
-        
-        self.input_label = tk.Label(self.input_frame, text="Enter your text:")
-        self.input_label.pack(side="left", padx=5)
+# Define the function to handle form submission
+def userdata():
+    n = name.get()
+    e = email.get()
+    p = phno.get()
 
-        self.input_box = tk.Text(self.input_frame, height=5, width=30)
-        self.input_box.pack(side="left", padx=5)
+    print(f"user: {n}\nemail: {e}\nPhone number: {p}")
 
-        # Display button
-        self.display_button = tk.Button(self.root, text="Display Input", command=self.display_input)
-        self.display_button.pack(pady=5)
+    # Clear the input fields
+    name.set('')
+    email.set('')
+    phno.set('')
 
-        # Label to show input
-        self.display_label = tk.Label(self.root, text="")
-        self.display_label.pack(pady=10)
+# Create and pack the main frame for the title
+f1 = Frame(root)
+f1.pack(pady=25)
 
-        # Pop-up button
-        self.popup_button = tk.Button(self.root, text="Show Pop-up", command=self.show_popup)
-        self.popup_button.pack(pady=5)
+# Create and pack the title label
+l1 = Label(f1, text='Sign In', font=('Helvetica', 30))
+l1.pack()
 
-    def display_input(self):
-        user_input = self.input_box.get("1.0", "end-1c")
-        self.display_label.config(text=f"Entered Text: {user_input}")
+# Create and pack the frame for the username field
+f2 = Frame(root)
+f2.pack(padx=40, pady=15)
 
-    def show_popup(self):
-        messagebox.showinfo("Greeting", "Hello! This is your pop-up message.")
+# Create and pack the username label and entry
+l2 = Label(f2, text='Username', font=('Helvetica', 10))
+l2.pack(side='left', padx=10)
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = App(root)
-    root.mainloop()
+e1 = Entry(f2, textvariable=name, width=30)
+e1.pack(side='right')
+
+# Create and pack the frame for the email field
+f3 = Frame(root)
+f3.pack(padx=40, pady=15)
+
+# Create and pack the email label and entry
+l3 = Label(f3, text='Email', font=('Helvetica', 10))
+l3.pack(side='left', padx=10)
+
+e2 = Entry(f3, textvariable=email, width=30)
+e2.pack(side='right')
+
+# Create and pack the frame for the phone number field
+f4 = Frame(root)
+f4.pack(padx=40, pady=15)
+
+# Create and pack the phone number label and entry
+l4 = Label(f4, text='Phone No.', font=('Helvetica', 10))
+l4.pack(side='left', padx=10)
+
+e3 = Entry(f4, textvariable=phno, width=30)
+e3.pack(side='right')
+
+# Create and pack the frame for the submit button
+f5 = Frame(root)
+f5.pack(padx=40, pady=5)
+
+# Create and pack the submit button
+b1 = Button(f5, text='Submit', width=9, height=2, command=userdata)
+b1.pack(pady=5, padx=5)
+
+# Run the Tkinter event loop
+root.mainloop()
